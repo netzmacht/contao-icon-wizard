@@ -67,6 +67,14 @@ class IconWizardController extends \Backend
 
 		$icons = array();
 
+		// support options callback
+		if(isset($GLOBALS['TL_DCA'][$table]['fields'][$field]['options_callback'])) {
+			$callback = $GLOBALS['TL_DCA'][$table]['fields'][$field]['options_callback'];
+
+			$this->import($callback[0]);
+			$GLOBALS['TL_DCA'][$table]['fields'][$field]['options'] = $this->$callback[0]->$callback[1]();
+		}
+
 		foreach($GLOBALS['TL_DCA'][$table]['fields'][$field]['options'] as $groupName => $groupIcons) {
 			foreach($groupIcons as $icon) {
 				$icons[$groupName][] = array(
