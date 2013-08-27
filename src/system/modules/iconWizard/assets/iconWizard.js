@@ -19,12 +19,12 @@ var iconWizard = new Class(
 
         // register events
         this.containers.each(function(el) {
-            el.addEvent('click', this.selectIcon.bindWithEvent(this, [el]));
+            el.addEvent('click', function(event) { this.selectIcon(event, el) }.bind(this));
         }.bind(this));
 
-        this.reset.addEvent('click', this.resetSelection.bindWithEvent(this, [this.reset]));
-        this.search.addEvent('keyup', this.searchIcon.bindWithEvent(this, [this.search]));
-        this.search.addEvent('change', this.searchIcon.bindWithEvent(this, [this.search]));
+        this.reset.addEvent('click', function(event) { this.resetSelection(event, this.reset) }.bind(this));
+        this.search.addEvent('keyup', function(event) { this.searchIcon(event, this.search) }.bind(this));
+        this.search.addEvent('change', function(event) { this.searchIcon(event, this.search) }.bind(this));
 
         // select current icon
         var el = $('icon_container_' + this.input.get('value'));

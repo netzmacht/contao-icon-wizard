@@ -136,7 +136,7 @@ class IconWizard extends \TextField
 		return sprintf(
 			'<div class="iconWizard"><input type="hidden" name="%s" id="ctrl_%s" value="%s"%s'
 			. '<span class="icon">%s</span> <span class="title">%s</span>'
-			. ' <a href="javascript:Backend.openModalIframe({url:\'%s\', width: \'%s\', title: \'%s\'});"'
+			. ' <a href="%s" onclick="Backend.getScrollOffset();Backend.openModalIframe({url:\'%s\', width: %s, title: \'%s\'});return false"'
 			. ' title="%s" class="tl_submit">%s</a></div>',
 			$this->name,
 			$this->name,
@@ -145,7 +145,8 @@ class IconWizard extends \TextField
 			$this->icon ? sprintf($this->iconTemplate, $this->icon) : '',
 			$this->icon ? $this->icon : '-',
 			$url,
-			'790px',
+			$url,
+			790,
 			$GLOBALS['TL_LANG']['MSC']['iconWizard'][0],
 			$GLOBALS['TL_LANG']['MSC']['iconWizardlink'][1],
 			$GLOBALS['TL_LANG']['MSC']['iconWizardlink'][0]
