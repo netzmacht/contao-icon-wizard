@@ -127,8 +127,6 @@ class IconWizard extends \TextField
 	 */
 	public function generate()
 	{
-		$GLOBALS['TL_CSS']['iconWizard'] = 'system/modules/iconWizard/assets/wizard.css';
-
 		$url = sprintf('system/modules/iconWizard/public/popup.php?table=%s&amp;field=%s&amp;name=ctrl_%s&amp;id=%s',
 			\Input::get('table'), $this->name, $this->name, \Input::get('id')
 		);

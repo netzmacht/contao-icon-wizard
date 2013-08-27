@@ -15,3 +15,7 @@
 $GLOBALS['BE_FFL']['icon'] = 'IconWizard';
 
 $GLOBALS['TL_CONFIG']['iconWizardIconTemplate'] = '<i class="icon-%s"></i>';
+
+if(TL_MODE == 'BE') {
+	$GLOBALS['TL_CSS']['iconWizard'] = 'system/modules/iconWizard/assets/wizard.css';
+}
