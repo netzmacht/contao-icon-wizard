@@ -114,6 +114,12 @@ class IconWizard extends \TextField
 		if($this->hasErrors()) {
 			return;
 		}
+		elseif($value == '')
+		{
+			if($this->mandatory) {
+				$this->addError($this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel)));
+			}
+		}
 		elseif(!$this->iconExists($value)) {
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['iconNotFound'], $this->strLabel));
 		}

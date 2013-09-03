@@ -49,8 +49,7 @@ var iconWizard = new Class(
         e.preventDefault();
         e.stop();
 
-        console.log(el);
-
+        this.containers.removeClass('active');
         this.containers.removeClass('invisible');
         this.groups.removeClass('invisible');
 

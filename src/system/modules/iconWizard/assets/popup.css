@@ -52,6 +52,7 @@
     top: 0;
     padding: 0px 12px 8px;
     border-bottom: 1px solid #eee;
+    z-index: 1000;
 }
 
 .popup #container {
