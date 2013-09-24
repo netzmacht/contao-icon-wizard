@@ -38,7 +38,7 @@ class IconWizardController extends \Backend
 
 
 	/**
-	 * @throws \HttpInvalidParamException
+	 * @throws \RuntimeException
 	 */
 	public function run()
 	{
@@ -52,13 +52,13 @@ class IconWizardController extends \Backend
 		$this->loadDataContainer($table);
 
 		if(!isset($GLOBALS['TL_DCA'][$table]['fields'][$field]) || $GLOBALS['TL_DCA'][$table]['fields'][$field]['inputType'] != 'icon') {
-			throw new \HttpInvalidParamException('Invalid call. Field does not exists or is not an icon wizard');
+			throw new \RuntimeException('Invalid call. Field does not exists or is not an icon wizard');
 		}
 
 		$result = $this->Database->prepare(sprintf('SELECT %s FROM %s WHERE id=?', $field, $table))->limit(1)->execute($id);
 
 		if($result->numRows != 1) {
-			throw new \HttpInvalidParamException('Selected entry does not exists');
+			throw new \RuntimeException('Selected entry does not exists');
 		}
 
 		$iconTemplate = isset($GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['iconTemplate']) ?
