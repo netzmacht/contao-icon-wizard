@@ -20,13 +20,16 @@
     },
     "require":{
         "php":">=5.3",
-        "contao/core":">=3.0",
+        "contao/core":">=3.0"
     },
     "autoload":{
         "classmap":["src/system/modules/iconWizard/"]
     },
     "suggest": {
         "netzmacht/font-awesome" : "Use Font Awesome icons"
+    },
+    "replace": {
+        "contao-legacy/iconWizard" : "*"
     },
     "extra":{
         "contao": {
