@@ -16,7 +16,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../../../initialize.php');
+require_once(dirname(__FILE__) . '/../../../initialize.php');
 
 
 $controller = new \Netzmacht\IconWizardController();
