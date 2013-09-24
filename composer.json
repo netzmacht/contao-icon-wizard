@@ -1,5 +1,5 @@
 {
-    "name":"netzmacht/contao-iconWizard",
+    "name":"netzmacht/contao-iconwizard",
     "description":"Provides an backend widget for choosing icons of an icon font",
     "keywords":["icons", "widget", "wizard", "contao", "dca"],
     "type":"contao-module",
