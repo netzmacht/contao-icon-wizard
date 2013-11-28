@@ -36,6 +36,9 @@
             "symlinks":{
                 "src/system/modules/iconWizard": "system/modules/iconWizard"
             }
+        },
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
         }
     }
 }
