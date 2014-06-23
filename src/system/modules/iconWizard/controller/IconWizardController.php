@@ -46,7 +46,8 @@ class IconWizardController extends \Backend
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['iconWizard'][1];
 
 		$table = \Input::get('table');
-		$field =  \Input::get('field');
+		$field = \Input::get('field');
+		$name  = \Input::get('name');
 		$id = \Input::get('id');
 
 		$this->loadDataContainer($table);
@@ -105,7 +106,8 @@ class IconWizardController extends \Backend
 
 		$this->Template->table = $table;
 		$this->Template->field = $field;
-		$this->Template->icon = $result->$field;
+		$this->Template->name  = $name;
+		$this->Template->icon  = $result->$field;
 		$this->Template->icons = $icons;
 
 		$this->Template->output();

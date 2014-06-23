@@ -134,7 +134,7 @@ class IconWizard extends \TextField
 	public function generate()
 	{
 		$url = sprintf('system/modules/iconWizard/public/popup.php?table=%s&amp;field=%s&amp;name=ctrl_%s&amp;id=%s',
-			\Input::get('table'), $this->name, $this->name, \Input::get('id')
+			\Input::get('table'), $this->strField, $this->name, \Input::get('id')
 		);
 
 		return sprintf(

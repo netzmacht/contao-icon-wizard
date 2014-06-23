@@ -68,7 +68,7 @@
 		</div>
 		<script>
 			window.addEvent('domready',function(){
-				new iconWizard('ctrl_<?php echo $this->field;?>');
+				new iconWizard('<?php echo $this->name;?>');
 			});
 		</script>
 
