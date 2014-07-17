@@ -14,9 +14,9 @@
     ],
     "support":{
         "email":"mail@netzmacht.de",
-        "issues":"https://github.com/netzmacht/iconWizard/issues",
+        "issues":"https://github.com/netzmacht/contao-icon-wizard/issues",
         "wiki": "http://netzmacht.de/erweiterungen/entwickler-tools/icon-wizard/",
-        "source":"https://github.com/netzmacht/iconWizard"
+        "source":"https://github.com/netzmacht/contao-icon-wizard"
     },
     "require":{
         "php":">=5.3",
