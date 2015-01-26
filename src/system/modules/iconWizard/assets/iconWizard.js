@@ -29,6 +29,10 @@ var iconWizard = new Class(
         // select current icon
         var el = $('icon_container_' + this.input.get('value'));
 
+        $$('form.search').addEvent('submit', function(event) {
+            event.stop();
+        });
+
         if(el != null)  {
             el.addClass('active');
             this.fxScroll.start(0, el.getPosition().y - 40);
