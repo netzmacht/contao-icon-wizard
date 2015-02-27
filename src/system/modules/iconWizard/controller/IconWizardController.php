@@ -92,7 +92,7 @@ class IconWizardController extends \Backend
 		$this->Template->resetTitle = $GLOBALS['TL_LANG']['MSC']['iconWizardReset'][1];
 
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = \Environment::get('url');
+		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
