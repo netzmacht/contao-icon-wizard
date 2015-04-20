@@ -23,7 +23,9 @@
         "contao/core":">=3.0,<3.6-dev"
     },
     "autoload":{
-        "classmap":["src/system/modules/iconWizard/"]
+        "psr-4": {
+          "Netzmacht\\Contao\\IconWizard": "src"
+        }
     },
     "suggest": {
         "netzmacht/font-awesome" : "Use Font Awesome icons"
