@@ -46,11 +46,6 @@ class WizardController extends \Backend
 
         $dataContainer = $this->initializeDataContainer($table, $field);
 
-        if(!isset($GLOBALS['TL_DCA'][$table]['fields'][$field])
-            || $GLOBALS['TL_DCA'][$table]['fields'][$field]['inputType'] != 'icon') {
-            throw new \RuntimeException('Invalid call. Field does not exists or is not an icon wizard');
-        }
-
         $dataContainer->activeRecord = $this->Database
             ->prepare(sprintf('SELECT %s FROM %s WHERE id=?', $field, $table))
             ->limit(1)
@@ -158,6 +153,11 @@ class WizardController extends \Backend
         $driverClass   = 'DC_' . $GLOBALS['TL_DCA'][$table]['config']['dataContainer'];
         $dataContainer = new $driverClass($table);
         $dataContainer->field = $field;
+
+        if(!isset($GLOBALS['TL_DCA'][$table]['fields'][$field])
+            || $GLOBALS['TL_DCA'][$table]['fields'][$field]['inputType'] != 'icon') {
+            throw new \RuntimeException('Invalid call. Field does not exists or is not an icon wizard');
+        }
 
         return $dataContainer;
     }
