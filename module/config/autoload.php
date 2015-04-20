@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
- * @package IconWizard
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @package    icon-wizard
+ * @author     David Molineus <david.molineus@netzmacht.de>
+ * @copyright  2013-2015 netzmacht creative David Molineus
+ * @license    LGPL 3.0
+ * @filesource
+ *
  */
 
 /**

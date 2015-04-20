@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package    dev
+ * @package    icon-wizard
  * @author     David Molineus <david.molineus@netzmacht.de>
- * @copyright  2015 netzmacht creative David Molineus
+ * @copyright  2013-2015 netzmacht creative David Molineus
  * @license    LGPL 3.0
  * @filesource
  *

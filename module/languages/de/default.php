@@ -1,14 +1,12 @@
 <?php
 
 /**
- * Contao Open Source CMS
+ * @package    icon-wizard
+ * @author     David Molineus <david.molineus@netzmacht.de>
+ * @copyright  2013-2015 netzmacht creative David Molineus
+ * @license    LGPL 3.0
+ * @filesource
  *
- * Copyright (C) 2005-2013 Leo Feyer
- *
- * @package   iconWizard
- * @author    netzmacht creative David Molineus
- * @license   MPL/2.0
- * @copyright 2013 netzmacht creative David Molineus
  */
 
 $GLOBALS['TL_LANG']['ERR']['iconNotFound'] = 'Das ausgewählte Icon existiert nicht.';
