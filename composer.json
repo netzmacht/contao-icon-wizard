@@ -20,7 +20,7 @@
     },
     "require":{
         "php":">=5.3",
-        "contao/core":">=3.0,<3.5-dev"
+        "contao/core":">=3.0,<3.6-dev"
     },
     "autoload":{
         "classmap":["src/system/modules/iconWizard/"]
@@ -34,7 +34,7 @@
     "extra":{
         "contao": {
             "sources":{
-                "module": "system/modules/iconWizard"
+                "module": "system/modules/icon-wizard"
             }
         },
         "branch-alias": {
