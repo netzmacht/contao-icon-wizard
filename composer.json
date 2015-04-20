@@ -24,7 +24,7 @@
     },
     "autoload":{
         "psr-4": {
-          "Netzmacht\\Contao\\IconWizard": "src"
+          "Netzmacht\\Contao\\IconWizard\\": "src"
         }
     },
     "suggest": {
