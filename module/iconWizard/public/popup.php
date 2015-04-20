@@ -19,5 +19,5 @@ define('TL_MODE', 'BE');
 require(dirname(dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])))) . '/initialize.php');
 
 
-$controller = new \Netzmacht\IconWizardController();
+$controller = new \Netzmacht\Contao\IconWizard\WizardController();
 $controller->run();
