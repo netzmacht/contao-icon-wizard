@@ -14,7 +14,7 @@
 	//$objCombiner->add('system/modules/iconWizard/assets/style.css');
 	echo $objCombiner->getCombinedFile();
 	?>">
-	<link rel="stylesheet" href="system/modules/iconWizard/assets/popup.css">
+	<link rel="stylesheet" href="system/modules/icon-wizard/assets/popup.css">
 	<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 	<?php echo $this->stylesheets; ?>
 	<script><?php echo $this->getLocaleString(); ?></script>
@@ -29,7 +29,7 @@
 	<script><?php echo $this->getDateString(); ?></script>
 	<?php echo $this->javascripts; ?>
 	<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
-	<script src="system/modules/iconWizard/assets/iconWizard.js"></script>
+	<script src="system/modules/icon-wizard/assets/iconWizard.js"></script>
 </head>
 <body class="__ua__ popup">
 

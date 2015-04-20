@@ -17,5 +17,5 @@ $GLOBALS['BE_FFL']['icon'] = 'Netzmacht\Contao\IconWizard\IconWidget';
 $GLOBALS['TL_CONFIG']['iconWizardIconTemplate'] = '<i class="icon-%s"></i>';
 
 if(TL_MODE == 'BE') {
-	$GLOBALS['TL_CSS']['iconWizard'] = 'system/modules/iconWizard/assets/wizard.css';
+	$GLOBALS['TL_CSS']['iconWizard'] = 'system/modules/icon-wizard/assets/wizard.css';
 }
