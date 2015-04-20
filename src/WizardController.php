@@ -35,6 +35,7 @@ class WizardController extends \Backend
 
     /**
      * @throws \RuntimeException
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function run()
     {
@@ -110,6 +111,7 @@ class WizardController extends \Backend
      * Prepare the template.
      * 
      * @return \BackendTemplate
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     private function prepareTemplate()
     {

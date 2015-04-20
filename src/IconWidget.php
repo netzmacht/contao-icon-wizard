@@ -37,7 +37,9 @@ class IconWidget extends \TextField
 
 	/**
 	 * set default iconTemplate
+     *
 	 * @param null $arrAttributes
+     * @SuppressWarnings(PHPMD.Superglobals)
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -103,6 +105,7 @@ class IconWidget extends \TextField
 	/**
 	 * @param mixed $value
 	 * @return mixed
+     * @SuppressWarnings(PHPMD.Superglobals)
 	 */
 	protected function validator($value)
 	{
@@ -127,6 +130,7 @@ class IconWidget extends \TextField
 
 	/**
 	 * @return string
+     * @SuppressWarnings(PHPMD.Superglobals)
 	 */
 	public function generate()
 	{
