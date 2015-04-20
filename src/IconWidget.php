@@ -12,14 +12,14 @@
  */
 
 
-namespace Netzmacht;
+namespace Netzmacht\Contao\IconWizard;
 
 
 /**
  * Class IconWizard
  * @package Netzmacht
  */
-class IconWizard extends \TextField
+class IconWidget extends \TextField
 {
 	/**
 	 * Template

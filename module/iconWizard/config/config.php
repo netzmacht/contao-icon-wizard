@@ -12,7 +12,7 @@
  */
 
 
-$GLOBALS['BE_FFL']['icon'] = 'IconWizard';
+$GLOBALS['BE_FFL']['icon'] = 'Netzmacht\Contao\IconWizard\IconWidget';
 
 $GLOBALS['TL_CONFIG']['iconWizardIconTemplate'] = '<i class="icon-%s"></i>';
 
