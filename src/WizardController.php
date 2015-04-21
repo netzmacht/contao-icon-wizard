@@ -163,7 +163,7 @@ class WizardController extends \Backend
     private function loadRow($field, $table, $rowId, $dataContainer)
     {
         $dataContainer->activeRecord = $this->Database
-            ->prepare(sprintf('SELECT %s FROM %s WHERE id=?', $field, $table))
+            ->prepare(sprintf('SELECT * FROM %s WHERE id=?', $table))
             ->limit(1)
             ->execute($rowId);
 
@@ -188,7 +188,7 @@ class WizardController extends \Backend
             $this->dca['fields'][$field]['eval']['iconTemplate'] :
             $GLOBALS['TL_CONFIG']['iconWizardIconTemplate'];
 
-        foreach ($this->dca['fields'][$field]['options'] as $groupName => $groupIcons) {
+        foreach ((array) $this->dca['fields'][$field]['options'] as $groupName => $groupIcons) {
             foreach ($groupIcons as $icon) {
                 $icons[$groupName][] = array(
                     'title'     => $icon,
