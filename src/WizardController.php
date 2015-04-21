@@ -43,7 +43,9 @@ class WizardController extends \Backend
     /**
      * Run the controller.
      *
-     * @throws \RuntimeException
+     * @throws \RuntimeException If an invalid call is made.
+     * @return void
+     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function run()
@@ -51,12 +53,13 @@ class WizardController extends \Backend
         $table = \Input::get('table');
         $field = \Input::get('field');
         $name  = \Input::get('name');
-        $id    = \Input::get('id');
+        $rowId = \Input::get('id');
 
         $dataContainer = $this->initializeDataContainer($table, $field);
-        $this->loadRow($field, $table, $id, $dataContainer);
+        $this->loadRow($field, $table, $rowId, $dataContainer);
 
         $template = $this->prepareTemplate();
+
         $template->table = $table;
         $template->field = $field;
         $template->name  = $name;
@@ -104,6 +107,7 @@ class WizardController extends \Backend
      * @param string $field The field name.
      *
      * @return \DataContainer
+     * @throws \RuntimeException If the field does not exists.
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     private function initializeDataContainer($table, $field)
@@ -115,13 +119,13 @@ class WizardController extends \Backend
 
         static::loadDataContainer($table);
 
-        $this->dca =& $GLOBALS['TL_DCA'][$table];
-
+        $this->dca     = &$GLOBALS['TL_DCA'][$table];
         $driverClass   = 'DC_' . $this->dca['config']['dataContainer'];
         $dataContainer = new $driverClass($table);
+
         $dataContainer->field = $field;
 
-        if(!isset($this->dca['fields'][$field]) || $this->dca['fields'][$field]['inputType'] != 'icon') {
+        if (!isset($this->dca['fields'][$field]) || $this->dca['fields'][$field]['inputType'] != 'icon') {
             throw new \RuntimeException('Invalid call. Field does not exists or is not an icon wizard');
         }
 
@@ -154,6 +158,7 @@ class WizardController extends \Backend
      * @param \DataContainer $dataContainer The data container.
      *
      * @return void
+     * @throws \RuntimeException If no data row is found.
      */
     private function loadRow($field, $table, $rowId, $dataContainer)
     {
@@ -199,7 +204,7 @@ class WizardController extends \Backend
      * Trigger callback.
      *
      * @param array|callable $callback  Callback to trigger.
-     * @param array          $arguments Arguments
+     * @param array          $arguments Callback arguments.
      *
      * @return mixed
      */
