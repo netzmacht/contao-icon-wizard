@@ -13,71 +13,80 @@ namespace Netzmacht\Contao\IconWizard;
 
 
 /**
- * Class IconWizard
+ * IconWidget class.
+ *
  * @package Netzmacht
  */
 class IconWidget extends \TextField
 {
     /**
-     * Template
+     * The template name.
+     *
      * @var string
      */
     protected $strTemplate = 'be_widget';
 
     /**
-     * @var
+     * The icons.
+     *
+     * @var array
      */
     protected $arrIcons;
 
     /**
-     * @var
+     * The icon template pattern.
+     *
+     * @var string
      */
     protected $strIconTemplate;
 
 
     /**
-     * set default iconTemplate
+     * Set default iconTemplate.
      *
-     * @param null $arrAttributes
+     * @param array|null $attributes The widget attributes.
+     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function __construct($arrAttributes=null)
+    public function __construct($attributes = null)
     {
         $this->iconTemplate = $GLOBALS['TL_CONFIG']['iconWizardIconTemplate'];
-        parent::__construct($arrAttributes);
+
+        parent::__construct($attributes);
     }
 
-
     /**
-     * @param string $key
-     * @return mixed|string
+     * Get the attributes.
+     *
+     * @param string $key The param key.
+     *
+     * @return mixed
      */
     public function __get($key)
     {
         switch($key) {
             case 'icon':
                 return $this->varValue;
-                break;
 
             case 'icons':
             case 'options':
                 return $this->arrIcons;
-                break;
 
             case 'iconTemplate':
                 return $this->strIconTemplate;
-                break;
 
             default:
                 return parent::__get($key);
-                break;
         }
     }
 
-
     /**
-     * @param string $key
-     * @param mixed $value
+     * Set the magic value.
+     *
+     * @param string $key   The attribute key.
+     * @param mixed  $value The attribute value.
+     *
+     * @return void
      */
     public function __set($key, $value)
     {
@@ -103,46 +112,57 @@ class IconWidget extends \TextField
 
 
     /**
-     * @param mixed $value
+     * Call the validator.
+     *
+     * @param mixed $value The value.
+     *
      * @return mixed
+     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function validator($value)
     {
         $value = parent::validator($value);
 
-        if($this->hasErrors()) {
-            return;
-        }
-        elseif($value == '')
-        {
-            if($this->mandatory) {
-                $this->addError($this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel)));
+        if ($this->hasErrors()) {
+            return null;
+        } elseif ($value == '') {
+            if ($this->mandatory) {
+                $this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
             }
-        }
-        elseif(!$this->iconExists($value)) {
+        } elseif (!$this->iconExists($value)) {
             $this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['iconNotFound'], $this->strLabel));
         }
 
         return $value;
     }
 
-
     /**
+     * Generate the widget.
+     *
      * @return string
+     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function generate()
     {
-        $url = sprintf('system/modules/icon-wizard/public/popup.php?table=%s&amp;field=%s&amp;name=ctrl_%s&amp;id=%s',
-            \Input::get('table'), $this->strField, $this->name, \Input::get('id')
+        $url = sprintf(
+            'system/modules/icon-wizard/public/popup.php?table=%s&amp;field=%s&amp;name=ctrl_%s&amp;id=%s',
+            \Input::get('table'),
+            $this->strField,
+            $this->name,
+            \Input::get('id')
         );
 
+        $template = <<<HTML
+<div class="iconWizard"><input type="hidden" name="%s" id="ctrl_%s" value="%s"%s
+<span class="icon">%s</span> <span class="title">%s</span><a href="%s"
+onclick="Backend.getScrollOffset();Backend.openModalIframe({url:'%s', width: %s, title: '%s'});return false"
+ title="%s" class="tl_submit">%s</a></div>
+HTML;
+
         return sprintf(
-            '<div class="iconWizard"><input type="hidden" name="%s" id="ctrl_%s" value="%s"%s'
-            . '<span class="icon">%s</span> <span class="title">%s</span>'
-            . ' <a href="%s" onclick="Backend.getScrollOffset();Backend.openModalIframe({url:\'%s\', width: %s, title: \'%s\'});return false"'
-            . ' title="%s" class="tl_submit">%s</a></div>',
+            $template,
             $this->name,
             $this->name,
             $this->icon,
@@ -158,24 +178,22 @@ class IconWidget extends \TextField
         );
     }
 
-
     /**
-     * check if icon exists
+     * Check if icon exists.
      *
-     * @param $icon
+     * @param string $icon The icon name.
+     *
      * @return bool
-     *
      */
     protected function iconExists($icon)
     {
-        foreach($this->icons as $group)
-        {
-            foreach($group as $entry) {
-                if(!is_array($entry)) {
+        foreach ($this->icons as $group) {
+            foreach ($group as $entry) {
+                if (!is_array($entry)) {
                     continue;
                 }
 
-                if($entry['value'] == $icon) {
+                if ($entry['value'] === $icon) {
                     return true;
                 }
             }
