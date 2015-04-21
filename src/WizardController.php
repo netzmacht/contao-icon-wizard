@@ -56,7 +56,7 @@ class WizardController extends \Backend
         $rowId = \Input::get('id');
 
         $dataContainer = $this->initializeDataContainer($table, $field);
-        $this->loadRow($field, $table, $rowId, $dataContainer);
+        $this->loadRow($table, $rowId, $dataContainer);
 
         $template = $this->prepareTemplate();
 
@@ -152,7 +152,6 @@ class WizardController extends \Backend
     /**
      * Load the data row.
      *
-     * @param string         $field         The field name.
      * @param string         $table         The table name.
      * @param int            $rowId         The row id.
      * @param \DataContainer $dataContainer The data container.
@@ -160,7 +159,7 @@ class WizardController extends \Backend
      * @return void
      * @throws \RuntimeException If no data row is found.
      */
-    private function loadRow($field, $table, $rowId, $dataContainer)
+    private function loadRow($table, $rowId, $dataContainer)
     {
         $dataContainer->activeRecord = $this->Database
             ->prepare(sprintf('SELECT * FROM %s WHERE id=?', $table))
