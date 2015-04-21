@@ -19,6 +19,13 @@ namespace Netzmacht\Contao\IconWizard;
 class WizardController extends \Backend
 {
     /**
+     * Dca definition reference.
+     *
+     * @var array
+     */
+    private $dca;
+
+    /**
      * Construct.
      */
     public function __construct()
@@ -34,6 +41,8 @@ class WizardController extends \Backend
     }
 
     /**
+     * Run the controller.
+     *
      * @throws \RuntimeException
      * @SuppressWarnings(PHPMD.Superglobals)
      */
@@ -45,59 +54,14 @@ class WizardController extends \Backend
         $id    = \Input::get('id');
 
         $dataContainer = $this->initializeDataContainer($table, $field);
-
-        $dataContainer->activeRecord = $this->Database
-            ->prepare(sprintf('SELECT %s FROM %s WHERE id=?', $field, $table))
-            ->limit(1)
-            ->execute($id);
-
-        if($dataContainer->activeRecord->numRows != 1) {
-            throw new \RuntimeException('Selected entry does not exists');
-        }
-
-        $iconTemplate = isset($GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['iconTemplate']) ?
-            $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['iconTemplate'] :
-            $GLOBALS['TL_CONFIG']['iconWizardIconTemplate'];
-
-        $icons  = array();
-        $values = $dataContainer->activeRecord->$field;
-
-        // Call the load_callback
-        if (is_array($GLOBALS['TL_DCA'][$table]['fields'][$field]['load_callback'])) {
-            foreach ($GLOBALS['TL_DCA'][$table]['fields'][$field]['load_callback'] as $callback) {
-                if (is_array($callback)) {
-                    $this->import($callback[0]);
-                    $values = $this->$callback[0]->$callback[1]($values, $dataContainer);
-                }
-                elseif (is_callable($callback)) {
-                    $values = $callback($values, $dataContainer);
-                }
-            }
-        }
-
-        // support options callback
-        if(isset($GLOBALS['TL_DCA'][$table]['fields'][$field]['options_callback'])) {
-            $callback = $GLOBALS['TL_DCA'][$table]['fields'][$field]['options_callback'];
-
-            $this->import($callback[0]);
-            $GLOBALS['TL_DCA'][$table]['fields'][$field]['options'] = $this->$callback[0]->$callback[1]();
-        }
-
-        foreach($GLOBALS['TL_DCA'][$table]['fields'][$field]['options'] as $groupName => $groupIcons) {
-            foreach($groupIcons as $icon) {
-                $icons[$groupName][] = array(
-                    'title' => $icon,
-                    'generated' => sprintf($iconTemplate, $icon),
-                );
-            }
-        }
+        $this->loadRow($field, $table, $id, $dataContainer);
 
         $template = $this->prepareTemplate();
         $template->table = $table;
         $template->field = $field;
         $template->name  = $name;
         $template->icon  = $dataContainer->activeRecord->$field;
-        $template->icons = $icons;
+        $template->icons = $this->generateIcons($field);
 
         $template->output();
     }
@@ -134,31 +98,120 @@ class WizardController extends \Backend
     }
 
     /**
-     * Iniitalize the data container driver.
+     * Initialize the data container driver.
      *
      * @param string $table The table name.
      * @param string $field The field name.
      *
      * @return \DataContainer
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     private function initializeDataContainer($table, $field)
     {
         // Define the current ID
         if (!defined('CURRENT_ID')) {
-            define('CURRENT_ID', (\Input::get('table') ? \Session::getInstance()->get('CURRENT_ID') : \Input::get('id')));
+            define('CURRENT_ID', $table ? \Session::getInstance()->get('CURRENT_ID') : $field);
         }
 
         static::loadDataContainer($table);
 
-        $driverClass   = 'DC_' . $GLOBALS['TL_DCA'][$table]['config']['dataContainer'];
+        $this->dca =& $GLOBALS['TL_DCA'][$table];
+
+        $driverClass   = 'DC_' . $this->dca['config']['dataContainer'];
         $dataContainer = new $driverClass($table);
         $dataContainer->field = $field;
 
-        if(!isset($GLOBALS['TL_DCA'][$table]['fields'][$field])
-            || $GLOBALS['TL_DCA'][$table]['fields'][$field]['inputType'] != 'icon') {
+        if(!isset($this->dca['fields'][$field]) || $this->dca['fields'][$field]['inputType'] != 'icon') {
             throw new \RuntimeException('Invalid call. Field does not exists or is not an icon wizard');
         }
 
+        $values = $dataContainer->activeRecord->$field;
+
+        // Call the load_callback
+        if (is_array($this->dca['fields'][$field]['load_callback'])) {
+            foreach ($this->dca['fields'][$field]['load_callback'] as $callback) {
+                $values = $this->triggerCallback($callback, array($values, $dataContainer));
+            }
+        }
+
+        // support options callback
+        if (isset($this->dca['fields'][$field]['options_callback'])) {
+            $this->dca['fields'][$field]['options'] = $this->triggerCallback(
+                $this->dca['fields'][$field]['options_callback'],
+                array($dataContainer)
+            );
+        }
+
         return $dataContainer;
+    }
+
+    /**
+     * Load the data row.
+     *
+     * @param string         $field         The field name.
+     * @param string         $table         The table name.
+     * @param int            $rowId         The row id.
+     * @param \DataContainer $dataContainer The data container.
+     *
+     * @return void
+     */
+    private function loadRow($field, $table, $rowId, $dataContainer)
+    {
+        $dataContainer->activeRecord = $this->Database
+            ->prepare(sprintf('SELECT %s FROM %s WHERE id=?', $field, $table))
+            ->limit(1)
+            ->execute($rowId);
+
+        if ($dataContainer->activeRecord->numRows != 1) {
+            throw new \RuntimeException('Selected entry does not exists');
+        }
+    }
+
+    /**
+     * Generate the icons.
+     *
+     * @param string $field The icons.
+     *
+     * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    private function generateIcons($field)
+    {
+        $icons = array();
+
+        $iconTemplate = isset($this->dca['fields'][$field]['eval']['iconTemplate']) ?
+            $this->dca['fields'][$field]['eval']['iconTemplate'] :
+            $GLOBALS['TL_CONFIG']['iconWizardIconTemplate'];
+
+        foreach ($this->dca['fields'][$field]['options'] as $groupName => $groupIcons) {
+            foreach ($groupIcons as $icon) {
+                $icons[$groupName][] = array(
+                    'title'     => $icon,
+                    'generated' => sprintf($iconTemplate, $icon),
+                );
+            }
+        }
+
+        return $icons;
+    }
+
+    /**
+     * Trigger callback.
+     *
+     * @param array|callable $callback  Callback to trigger.
+     * @param array          $arguments Arguments
+     *
+     * @return mixed
+     */
+    private function triggerCallback($callback, $arguments)
+    {
+        if (is_array($callback)) {
+            $this->import($callback[0]);
+            return call_user_func_array(array($this->$callback[0], $callback[1]), $arguments);
+        } elseif (is_callable($callback)) {
+            return call_user_func_array($callback, $arguments);
+        }
+
+        return null;
     }
 }
