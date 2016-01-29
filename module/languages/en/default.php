@@ -9,7 +9,7 @@
  *
  */
 
-$GLOBALS['TL_LANG']['ERR']['iconNotFound'] = 'The chosen template does not exists';
+$GLOBALS['TL_LANG']['ERR']['iconNotFound'] = 'The chosen icon does not exists';
 
 $GLOBALS['TL_LANG']['MSC']['iconWizard'][0] = 'Icon Wizard';
 $GLOBALS['TL_LANG']['MSC']['iconWizard'][1] = 'Please choose an icon';
