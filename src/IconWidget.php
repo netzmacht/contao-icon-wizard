@@ -148,10 +148,10 @@ class IconWidget extends \TextField
     {
         $url = sprintf(
             'system/modules/icon-wizard/public/popup.php?table=%s&amp;field=%s&amp;name=ctrl_%s&amp;id=%s',
-            \Input::get('table'),
+            $this->strTable,
             $this->strField,
             $this->name,
-            \Input::get('id')
+            $this->id
         );
 
         $template = <<<HTML
