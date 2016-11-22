@@ -211,7 +211,7 @@ class WizardController extends \Backend
     {
         if (is_array($callback)) {
             $this->import($callback[0]);
-            return call_user_func_array(array($this->$callback[0], $callback[1]), $arguments);
+            return call_user_func_array(array($this->{$callback[0]}, $callback[1]), $arguments);
         } elseif (is_callable($callback)) {
             return call_user_func_array($callback, $arguments);
         }
