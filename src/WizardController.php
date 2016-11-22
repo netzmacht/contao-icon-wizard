@@ -3,6 +3,7 @@
 /**
  * @package    icon-wizard
  * @author     David Molineus <david.molineus@netzmacht.de>
+ * @author     Marcel <ms@rtft.de>
  * @copyright  2013-2015 netzmacht creative David Molineus
  * @license    LGPL 3.0
  * @filesource
@@ -211,7 +212,7 @@ class WizardController extends \Backend
     {
         if (is_array($callback)) {
             $this->import($callback[0]);
-            return call_user_func_array(array($this->$callback[0], $callback[1]), $arguments);
+            return call_user_func_array(array($this->{$callback[0]}, $callback[1]), $arguments);
         } elseif (is_callable($callback)) {
             return call_user_func_array($callback, $arguments);
         }
