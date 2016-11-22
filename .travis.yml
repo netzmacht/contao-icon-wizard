@@ -9,10 +9,10 @@ php:
 
 env:
   matrix:
-    - CONTAO_VERSION=~3.2
-    - CONTAO_VERSION=~3.3
-    - CONTAO_VERSION=~3.4
-    - CONTAO_VERSION=~3.5
+    - CONTAO_VERSION=~3.2.0
+    - CONTAO_VERSION=~3.3.0
+    - CONTAO_VERSION=~3.4.0
+    - CONTAO_VERSION=~3.5.0
 
 sudo: false
 
@@ -26,7 +26,9 @@ script: ant -keep-going
 matrix:
   allow_failures:
     - php: "7.0"
-    - php: "nightly"
+  exclude:
+    - PHP: "5.3"
+      CONTAO_VERSION=~3.5
 
 # Hack to make things work again - we can not use a shallow repository.
 git:
