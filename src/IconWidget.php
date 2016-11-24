@@ -151,7 +151,7 @@ class IconWidget extends \TextField
             $this->strTable,
             $this->strField,
             $this->name,
-            $this->id
+            \Input::get('id')
         );
 
         $template = <<<HTML
