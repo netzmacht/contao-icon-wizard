@@ -20,7 +20,8 @@
     },
     "require":{
         "php":">=5.3",
-        "contao/core":">=3.0,<3.6-dev"
+        "contao/core":"~3.0 || ~4.3",
+        "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
     },
     "require-dev":{
     "netzmacht/contao-build-tools": "~1.1"
