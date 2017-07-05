@@ -14,7 +14,21 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require(dirname(dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])))) . '/initialize.php');
+define('TL_SCRIPT', 'system/modules/iconwizard/public/popup.php');
+
+// Contao 3.
+$file = dirname(dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])))) . '/initialize.php';
+if (file_exists($file)) {
+    require $file;
+}
+
+// Contao 4.
+$file = dirname(dirname(dirname(dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])))))) . '/system/initialize.php';
+if (file_exists($file)) {
+    require $file;
+} else {
+    throw new \RuntimeException('Could not find initialize.php');
+}
 
 
 $controller = new \Netzmacht\Contao\IconWizard\WizardController();
