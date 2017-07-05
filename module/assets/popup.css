@@ -55,6 +55,11 @@
     z-index: 1000;
 }
 
+#filterForm .tl_text {
+    width: 50%;
+    margin: 5px 0 0 0;
+}
+
 .popup #container {
     padding-top: 30px;
 }
