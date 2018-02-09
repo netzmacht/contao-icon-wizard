@@ -26,18 +26,18 @@ script: ant -keep-going
 
 matrix:
   exclude:
-    - php: "5.4"
-      env: CONTAO_VERSION=contao/core ~3.5.0
-    - php: "5.4"
-      env: CONTAO_VERSION=contao/core-bundle ~4.4.0
-    - php: "5.5"
-      env: CONTAO_VERSION=contao/core-bundle ~4.4.0
-    - php: "5.4"
-      env: CONTAO_VERSION=contao/core-bundle ~4.5.0
-    - php: "5.5"
-      env: CONTAO_VERSION=contao/core-bundle ~4.5.0
-    - php: "5.6"
-      env: CONTAO_VERSION=contao/core-bundle ~4.5.0
+  - php: "5.4"
+    env: CONTAO_VERSION=contao/core ~3.5.0
+  - php: "5.4"
+    env: CONTAO_VERSION=contao/core-bundle ~4.4.0
+  - php: "5.5"
+    env: CONTAO_VERSION=contao/core-bundle ~4.4.0
+  - php: "5.4"
+    env: CONTAO_VERSION=contao/core-bundle ~4.5.0
+  - php: "5.5"
+    env: CONTAO_VERSION=contao/core-bundle ~4.5.0
+  - php: "5.6"
+    env: CONTAO_VERSION=contao/core-bundle ~4.5.0
 
 # Hack to make things work again - we can not use a shallow repository.
 git:
