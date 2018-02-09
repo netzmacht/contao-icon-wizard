@@ -14,7 +14,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-define('TL_SCRIPT', 'system/modules/iconwizard/public/popup.php');
+define('TL_SCRIPT', 'system/modules/icon-wizard/public/popup.php');
 
 // Contao 3.
 $file = dirname(dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])))) . '/initialize.php';
