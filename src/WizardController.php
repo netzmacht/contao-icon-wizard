@@ -4,10 +4,9 @@
  * @package    icon-wizard
  * @author     David Molineus <david.molineus@netzmacht.de>
  * @author     Marcel <ms@rtft.de>
- * @copyright  2013-2015 netzmacht creative David Molineus
- * @license    LGPL 3.0
+ * @copyright  2013-2018 netzmacht David Molineus
+ * @license    LGPL 3.0-or-later
  * @filesource
- *
  */
 
 namespace Netzmacht\Contao\IconWizard;
@@ -72,7 +71,7 @@ class WizardController extends \Backend
 
     /**
      * Prepare the template.
-     * 
+     *
      * @return \BackendTemplate
      * @SuppressWarnings(PHPMD.Superglobals)
      */

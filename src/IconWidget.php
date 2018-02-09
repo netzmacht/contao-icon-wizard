@@ -3,14 +3,12 @@
 /**
  * @package    icon-wizard
  * @author     David Molineus <david.molineus@netzmacht.de>
- * @copyright  2013-2015 netzmacht creative David Molineus
- * @license    LGPL 3.0
+ * @copyright  2013-2018 netzmacht David Molineus
+ * @license    LGPL 3.0-or-later
  * @filesource
- *
  */
 
 namespace Netzmacht\Contao\IconWizard;
-
 
 /**
  * IconWidget class.
@@ -64,7 +62,7 @@ class IconWidget extends \TextField
      */
     public function __get($key)
     {
-        switch($key) {
+        switch ($key) {
             case 'icon':
                 return $this->varValue;
 
@@ -90,7 +88,7 @@ class IconWidget extends \TextField
      */
     public function __set($key, $value)
     {
-        switch($key) {
+        switch ($key) {
             case 'icon':
                 $this->varValue = $value;
                 break;

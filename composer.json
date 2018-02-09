@@ -1,53 +1,63 @@
 {
-    "name":"netzmacht/contao-iconwizard",
-    "description":"Provides an backend widget for choosing icons of an icon font",
-    "keywords":["icons", "widget", "wizard", "contao", "dca"],
-    "type":"contao-module",
-    "license":"LGPL-3.0+",
-    "authors":[
-        {
-            "name":"David Molineus",
-            "email":"mail@netzmacht.de",
-            "homepage":"http://www.netzmacht.de",
-            "role":"Project leader"
-        }
-    ],
-    "support":{
-        "email":"mail@netzmacht.de",
-        "issues":"https://github.com/netzmacht/contao-icon-wizard/issues",
-        "wiki": "http://netzmacht.de/erweiterungen/entwickler-tools/icon-wizard/",
-        "source":"https://github.com/netzmacht/contao-icon-wizard"
-    },
-    "require":{
-        "php":">=5.3",
-        "contao/core-bundle": "~3.1 || ~4.3",
-        "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
-    },
-    "require-dev":{
-    "netzmacht/contao-build-tools": "~1.1"
-    },
-    "autoload":{
-        "psr-4": {
-          "Netzmacht\\Contao\\IconWizard\\": "src"
-        }
-    },
-    "suggest": {
-        "netzmacht/font-awesome" : "Use Font Awesome icons"
-    },
-    "replace": {
-        "contao-legacy/iconWizard" : "*"
-    },
-    "prefer-stable": true,
-    "minimum-stability": "dev",
-    "extra":{
-        "contao": {
-            "sources":{
-                "module": "system/modules/icon-wizard"
-            }
-        },
-        "branch-alias": {
-            "dev-master": "1.2.x-dev",
-            "dev-develop": "1.3.x-dev"
-        }
+  "name": "netzmacht/contao-iconwizard",
+  "description": "Provides an backend widget for choosing icons of an icon font",
+  "keywords": [
+    "icons",
+    "widget",
+    "wizard",
+    "contao",
+    "dca"
+  ],
+  "type": "contao-module",
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "David Molineus",
+      "email": "mail@netzmacht.de",
+      "homepage": "https://netzmacht.de",
+      "role": "Developer"
     }
+  ],
+  "support": {
+    "email": "mail@netzmacht.de",
+    "issues": "https://github.com/netzmacht/contao-icon-wizard/issues",
+    "wiki": "http://netzmacht.de/erweiterungen/entwickler-tools/icon-wizard/",
+    "source": "https://github.com/netzmacht/contao-icon-wizard"
+  },
+  "require": {
+    "php": "^5.4 || ^7.0",
+    "contao/core-bundle": "~3.5 || ~4.3",
+    "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
+  },
+  "require-dev": {
+    "phpcq/all-tasks": "^1.2",
+    "php-http/guzzle6-adapter": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Netzmacht\\Contao\\IconWizard\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "files": [
+      "vendor/phpcq/autoload-validation/hacks/contao-hack.php"
+    ]
+  },
+  "suggest": {
+    "netzmacht/font-awesome": "Use Font Awesome icons"
+  },
+  "replace": {
+    "contao-legacy/iconWizard": "*"
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "module": "system/modules/icon-wizard"
+      }
+    },
+    "branch-alias": {
+      "dev-master": "1.2.x-dev",
+      "dev-develop": "1.3.x-dev"
+    }
+  }
 }
